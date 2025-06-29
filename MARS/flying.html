@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>火星シミュレーション</title>
+    <link rel="stylesheet" href="flying.css">
+</head>
+
+<body class = "background">
+    <div class="day-display">
+        <h2>日数: <span id="day">1</span> 日目</h2>
+    </div>
+    <img id="astronaut" src="image/man.png" alt="宇宙飛行士">
+
+    <div class="status-container">
+        <div class="status-bar">
+            <div>
+                体力: <span id="health">100</span>
+                <span id="abnormal-status" class="abnormal-status"></span>
+            </div>
+            <div class="bar-container">
+                <div id="health-bar" class="bar red"></div>        
+            </div>
+            空腹: <span id="hunger">100</span>
+            <div class="bar-container">
+                <div class="bar-threshold-inside"></div>
+                <div id="hunger-bar" class="bar orange"></div>
+            </div>
+            水分: <span id="thirst">100</span>
+            <div class="bar-container">
+                <div class="bar-threshold-inside"></div>
+                <div id="thirst-bar" class="bar blue"></div>
+            </div>
+            トレーニング: <span id="training">0</span>
+            <div class="bar-container">
+                <div id="training-bar" class="bar green"></div>
+            </div>
+            ストレス: <span id="stress">0</span>
+            <div class="bar-container">
+                <div id="stress-bar" class="bar purple"></div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="buttons">
+        <button id="bag-button" title="所持品を見る">
+            <img src="image/backpack.png" alt="バック" class="bag-icon">
+        </button>
+    </div>
+
+    <div class="buttons lower-buttons">
+        <button onclick="openMeal()" title="食事で空腹・水分を回復">食事</button>
+        <button onclick="train()" title="体力・トレーニング上昇">トレーニング</button>
+    </div>
+
+
+
+    <div style="text-align:center" class="summary">
+        <button onclick="nextDay()" style="text-align:center">次の日へ</button>
+    </div>
+    
+    <!--イベントログ-->
+<section id="event-log" class="event-log collapsed" onclick="toggleLog()">
+    <h2>🛸 イベントログ
+       <button id="toggle-log" title="クリックしてログを展開／折りたたみ">▼</button>
+<!--イベントログ展開縮小のボタン-->
+    </h2>
+    <ul id="event-messages">
+        <li>【1日目】宇宙船は順調に航行中です。</li>
+    </ul>
+</section>
+
+
+<!-- 所持品モーダル（chooseitem を再利用） -->
+<div id="bag-modal" class="modal hidden">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <h2>🎒 所持品一覧</h2>
+    <p>積載上限: <strong id="weight-limit">100</strong> kg</p>
+    <p>現在の合計重量: <strong id="current-weight">0</strong> kg</p>
+    <div id="item-list"></div>
+    <button onclick="closeBag()">閉じる</button>
+  </div>
+</div>
+
+<!--  食事モーダル -->
+<div id="meal-modal" class="modal hidden">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <h2>残り食料</h2>
+    <ul id="meal-list">
+        <li>
+            <img src="image/food.png" alt="加水食品" class="bag-icon" onclick="eat(1)">
+            <div>加水食品</div>
+            <div id="amount-food">残り: 0個</div>
+        </li>
+        <li>
+            <img src="image/can.jpg" alt="缶詰" class="bag-icon" onclick="eat(2)">
+            <div>缶詰</div>
+            <div id="amount-can">残り: 0個</div>
+        </li>
+        <li>
+            <img src="image/food2.png" alt="半乾燥食品" class="bag-icon" onclick="eat(3)">
+            <div>半乾燥食品</div>
+            <div id="amount-dry">残り: 0個</div>
+        </li>
+        <li>
+            <img src="image/water.png" alt="水" class="bag-icon" onclick="eat(4)">
+            <div>水</div>
+            <div id="amount-water">残り: 0個</div>
+        </li>
+    </ul>
+
+
+    <button onclick="closeMeal()">閉じる</button>
+  </div>
+</div>
+
+
+    <script src="flying.js"></script>
+    <div id="screen-fade"></div>
+
+</body>
+
+</html>
